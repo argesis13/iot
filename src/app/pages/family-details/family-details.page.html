@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Family Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+<ion-content>
+  <ion-grid fixed>
+    <ion-row class="ion-align-items-stretch">
+      <ion-col size="12" size-md="6" *ngFor="let member of members">
+        <ion-card class="speaker-card">
+          <ion-card-header>
+            <ion-item detail="false" lines="none" routerLink="/app/tabs/dashboard">
+              <ion-avatar slot="start">
+                <img [src]="member.imageUrl" [alt]="member.username + ' profile picture'">
+              </ion-avatar>
+              {{member.username}}
+            </ion-item>
+          </ion-card-header>
+
+          <ion-card-content>
+            <ion-list>
+              <ion-item>
+                <h3>Status: {{member.status}}</h3>
+              </ion-item>
+            </ion-list>
+          </ion-card-content>
+
+          <ion-row class="ion-no-padding ion-justify-content-center">
+            <ion-col size="6" class="ion-text-left">
+              <ion-button fill="clear" size="small" color="primary" (click)="contact(member)">
+                <ion-icon name="chatboxes" slot="start"></ion-icon>
+                Contact
+              </ion-button>
+            </ion-col>
+            <ion-col size="6" class="ion-text-right">
+              <ion-button fill="clear" size="small" color="primary" (click)="remove(member.username)">
+                <ion-icon name="close" slot="start"></ion-icon>
+                Remove member
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end" #fab>
+    <ion-fab-button (click)="addMember()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>
+
+

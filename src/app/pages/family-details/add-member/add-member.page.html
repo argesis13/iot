@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/app/tabs/dashboard"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Add Family Member</ion-title>
+  </ion-toolbar>
+
+  <ion-toolbar>
+    <ion-searchbar [(ngModel)]="queryText" (ionChange)="search()" placeholder="Search"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-grid fixed>
+    <ion-row class="ion-align-items-stretch">
+      <ion-col size="12" size-md="6" *ngFor="let member of members">
+        <ion-card class="speaker-card">
+          <ion-card-header>
+            <ion-item detail="false" lines="none" >
+
+              <ion-avatar class="ion-text-center">
+                <img [src]="member.imageUrl" [alt]="member.username + ' picture'">
+              </ion-avatar>
+                {{member.username}}
+            </ion-item>
+          </ion-card-header>
+
+          <ion-card-content>
+            <ion-row class="ion-no-padding ion-justify-content-center">
+              <ion-col  class="ion-text-center">
+                <ion-button size="small" color="primary" (click)="addToFamily(member)">
+                  Add to family
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+
+
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+<!--  <ion-list>-->
+<!--    <ion-card >-->
+<!--      <ion-card-header>-->
+<!--        <h3>{{member.username}}</h3>-->
+<!--      </ion-card-header>-->
+<!--      <ion-card-content>-->
+<!--        <ion-button (click)="addToFavourites(member)"></ion-button>-->
+<!--      </ion-card-content>-->
+<!--    </ion-card>-->
+<!--  </ion-list>-->
+</ion-content>

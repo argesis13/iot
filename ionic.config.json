@@ -1,0 +1,8 @@
+{
+  "name": "ionic-connected-neighbourhood",
+  "type": "angular",
+  "integrations": {
+    "cordova": {},
+    "capacitor": {}
+  }
+}

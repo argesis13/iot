@@ -1,0 +1,7 @@
+{
+  "appId": "icom.acvl.cartierul.iot",
+  "appName": "ionic-connected-neighbourhood",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www"
+}
