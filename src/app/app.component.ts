@@ -2,7 +2,7 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {Router} from '@angular/router';
 import {SwUpdate} from '@angular/service-worker';
 
-import {AlertController, Events, MenuController, Platform, ToastController} from '@ionic/angular';
+import {Events, MenuController, Platform, ToastController} from '@ionic/angular';
 
 import {SplashScreen} from '@ionic-native/splash-screen/ngx';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
@@ -10,7 +10,8 @@ import {StatusBar} from '@ionic-native/status-bar/ngx';
 import {Storage} from '@ionic/storage';
 
 import {UserData} from './providers/user-data';
-import {AccessService} from './providers/access.service';
+import {Observable} from 'rxjs';
+import {ModalControllerService} from './providers/modal-controller.service';
 
 
 @Component({
@@ -63,35 +64,15 @@ export class AppComponent implements OnInit {
     private userData: UserData,
     private swUpdate: SwUpdate,
     private toastCtrl: ToastController,
-    private accessService: AccessService,
-    private alertCtrl: AlertController
+    public modalController: ModalControllerService
   ) {
     this.initializeApp();
-    this.accessService.observeMessages('http://localhost:8282/access/query/petrescu/6000')
-      .subscribe(message => {
-        console.log(message);
-        if (message.includes('PENDING')) {
-          this.presentAlert(message);
-        }
-      });
-
   }
 
-  async presentAlert(message: String) {
-    const alert = await this.alertCtrl.create({
-      header: 'Alert',
-      subHeader: 'Subtitle',
-      message: 'miesaj',
-      buttons: ['OK']
-    });
-
-    await alert.present();
-  }
 
   async ngOnInit() {
     this.checkLoginStatus();
     this.listenForLoginEvents();
-
 
     this.swUpdate.available.subscribe(async res => {
       const toast = await this.toastCtrl.create({
@@ -102,7 +83,6 @@ export class AppComponent implements OnInit {
       });
 
       await toast.present();
-
 
       toast
         .onDidDismiss()

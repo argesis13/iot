@@ -36,7 +36,8 @@ const routes: Routes = [
     loadChildren: () => import('./pages/tabs-page/tabs-page.module').then(m => m.TabsModule),
     canLoad: [AuthGuard]
   },
-  { path: 'alerts', loadChildren: './pages/alerts/alerts.module#AlertsPageModule' }
+  { path: 'alerts', loadChildren: './pages/alerts/alerts.module#AlertsPageModule' },
+  { path: 'modal-page', loadChildren: './pages/modal-page/modal-page.module#ModalPagePageModule' }
 
 ];
 

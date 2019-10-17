@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {FamilyDetailsService} from '../../providers/family-details.service';
 import {UserData} from '../../providers/user-data';
-import {AccessService} from '../../providers/access.service';
 import {Subscription} from 'rxjs';
 
 @Component({
