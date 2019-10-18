@@ -37,18 +37,20 @@
 
     <ion-grid fixed>
       <ion-row class="ion-align-items-stretch">
-        <ion-col size="12" size-md="6">
-          <ion-card class="speaker-card" (click)="goToFamilyDetails()">
+        <ion-col size="12">
+          <ion-card class="speaker-card" [routerLink]="['/app/tabs/family-details/members']">
             <ion-card-header>
-              <ion-item detail="false" lines="none">
-                <ion-icon slot="start" name="ios-car"></ion-icon>
-                Allowed cars
+              <ion-item detail="false" lines="none" >
+                <ion-icon slot="start" name="contacts"></ion-icon>
+                Cars
               </ion-item>
             </ion-card-header>
             <ion-card-content>
               <ion-row class="ion-no-padding ion-justify-content-center">
-                <ion-col class="ion-text-center">
-                  Cars: 3
+                <ion-col  class="ion-text-center">
+                  <ion-text color="primary">
+                    <h1> Allowed License Plates: {{cars}}</h1>
+                  </ion-text>
                 </ion-col>
               </ion-row>
             </ion-card-content>
@@ -59,19 +61,17 @@
 
     <ion-grid fixed>
       <ion-row class="ion-align-items-stretch">
-        <ion-col size="12" size-md="6">
-          <ion-card class="speaker-card" (click)="goToFamilyDetails()">
+        <ion-col size="12">
+          <ion-card class="speaker-card" [routerLink]="['/app/tabs/family-details/members']">
             <ion-card-header>
-              <ion-item detail="false" lines="none">
-                <ion-icon slot="start" name="ios-alert"></ion-icon>
-                <ion-text color="danger">
-                  Alerts
-                </ion-text>
+              <ion-item detail="false" lines="none" >
+                <ion-icon slot="start" name="contacts"></ion-icon>
+                Cars
               </ion-item>
             </ion-card-header>
             <ion-card-content>
               <ion-row class="ion-no-padding ion-justify-content-center">
-                <ion-col class="ion-text-center">
+                <ion-col  class="ion-text-center">
                   <ion-list>
                     <ion-text color="primary">
                       <h1>
