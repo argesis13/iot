@@ -15,6 +15,7 @@ export class DashboardPage implements OnInit {
   members = 0;
   private sseStream: Subscription;
   cars = 0;
+  private parkingTotal = 0;
 
   constructor(private router: Router,
               private familyService: FamilyDetailsService,
