@@ -18,7 +18,6 @@ import {StreamingMedia} from '@ionic-native/streaming-media/ngx';
 import {YoutubeVideoPlayer} from '@ionic-native/youtube-video-player/ngx';
 import {ModalPagePage} from './pages/modal-page/modal-page.page';
 import {ModalPagePageModule} from './pages/modal-page/modal-page.module';
-import {ModalControllerService} from './providers/modal-controller.service';
 
 @NgModule({
   entryComponents: [ModalPagePage],

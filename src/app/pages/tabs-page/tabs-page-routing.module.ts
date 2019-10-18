@@ -79,6 +79,15 @@ const routes: Routes = [
             loadChildren: () => import('../cars/cars.module').then(m => m.CarsPageModule)
           }
         ]
+      },
+      {
+        path: 'parking-area',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('../parking-area/parking-area.module').then(m => m.ParkingAreaPageModule)
+          }
+        ]
       }
     ]
   }
