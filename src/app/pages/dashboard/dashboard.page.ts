@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {FamilyDetailsService} from '../../providers/family-details.service';
 import {UserData} from '../../providers/user-data';
-import {Subscription} from 'rxjs';
 import {ParkingService} from '../../providers/parking.service';
 
 @Component({
@@ -13,19 +12,20 @@ import {ParkingService} from '../../providers/parking.service';
 export class DashboardPage implements OnInit {
 
   members = 0;
-  private sseStream: Subscription;
   cars = 0;
   private parkingTotal = 0;
+  private parkingAvailable = 0;
 
   constructor(private router: Router,
               private familyService: FamilyDetailsService,
-              private userService: UserData, private parkingService: ParkingService) {
+              private userService: UserData,
+              private parkingService: ParkingService) {
   }
 
   ngOnInit() {
     this.members = 0;
     this.userService.getUsername().then(res => {
-    this.members = 0;
+      this.members = 0;
       this.familyService.getFamilyNumber(res).subscribe(
         response => {
           this.members = response;
@@ -37,18 +37,25 @@ export class DashboardPage implements OnInit {
     this.parkingService.getParkingAreaLive()
       .subscribe(message => {
         const pa = JSON.parse(message);
-        this.parkingTotal = pa['slots'].length;
+        const slots: [] = pa['slots'];
+        this.parkingTotal = slots.length;
+        this.parkingAvailable = 0;
+        slots.forEach(slot => {
+          if (slot['status'] === 'OCCUPIED') {
+            this.parkingAvailable += 1;
+          }
+        });
       });
   }
 
   ionViewWillEnter() {
     this.members = 0;
     this.userService.getUsername().then(res => {
-        this.familyService.getFamilyNumber(res).subscribe(
-          response => {
-            this.members = response;
-          }
-        );
+      this.familyService.getFamilyNumber(res).subscribe(
+        response => {
+          this.members = response;
+        }
+      );
     });
   }
 

@@ -16,14 +16,14 @@
         <ion-col size="12">
           <ion-card class="speaker-card" [routerLink]="['/app/tabs/family-details/members']">
             <ion-card-header>
-              <ion-item detail="false" lines="none" >
+              <ion-item detail="false" lines="none">
                 <ion-icon slot="start" name="contacts"></ion-icon>
                 Family
               </ion-item>
             </ion-card-header>
             <ion-card-content>
               <ion-row class="ion-no-padding ion-justify-content-center">
-                <ion-col  class="ion-text-center">
+                <ion-col class="ion-text-center">
                   <ion-text color="primary">
                     <h1> Members: {{members}}</h1>
                   </ion-text>
@@ -40,14 +40,14 @@
         <ion-col size="12">
           <ion-card class="speaker-card" [routerLink]="['/app/tabs/cars']">
             <ion-card-header>
-              <ion-item detail="false" lines="none" >
+              <ion-item detail="false" lines="none">
                 <ion-icon slot="start" name="car"></ion-icon>
                 Cars
               </ion-item>
             </ion-card-header>
             <ion-card-content>
               <ion-row class="ion-no-padding ion-justify-content-center">
-                <ion-col  class="ion-text-center">
+                <ion-col class="ion-text-center">
                   <ion-text color="primary">
                     <h1> Allowed License Plates: {{cars}}</h1>
                   </ion-text>
@@ -64,24 +64,25 @@
         <ion-col size="12">
           <ion-card class="speaker-card" [routerLink]="['/app/tabs/parking-area']">
             <ion-card-header>
-              <ion-item detail="false" lines="none" >
+              <ion-item detail="false" lines="none">
                 <ion-icon slot="start" name="alert"></ion-icon>
                 Visitors parking
               </ion-item>
             </ion-card-header>
             <ion-card-content>
               <ion-row class="ion-no-padding ion-justify-content-center">
-                <ion-col  class="ion-text-center">
+                <ion-col class="ion-text-center">
                   <ion-list>
                     <!--<ion-text color="primary">-->
-                      <!--<h1>-->
-                        <!--Light: no triggers created-->
-                      <!--</h1>-->
+                    <!--<h1>-->
+                    <!--Light: no triggers created-->
+                    <!--</h1>-->
                     <!--</ion-text>-->
                     <ion-text color="danger">
                       <h1>
-                        Total nr of Parking: {{parkingTotal}}
+                        Total nr of Parking:
                       </h1>
+                      <h1> {{parkingAvailable}} / {{parkingTotal}} </h1>
                     </ion-text>
                   </ion-list>
                 </ion-col>
