@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {FamilyDetailsService} from '../../providers/family-details.service';
 import {UserData} from '../../providers/user-data';
 import {Subscription} from 'rxjs';
+import {ParkingService} from '../../providers/parking.service';
 
 @Component({
   selector: 'dashboard',
@@ -15,7 +16,9 @@ export class DashboardPage implements OnInit {
   private sseStream: Subscription;
   cars = 0;
 
-  constructor(private router: Router, private familyService: FamilyDetailsService, private userService: UserData) {
+  constructor(private router: Router,
+              private familyService: FamilyDetailsService,
+              private userService: UserData, private parkingService: ParkingService) {
   }
 
   ngOnInit() {
