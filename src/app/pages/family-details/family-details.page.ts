@@ -22,11 +22,13 @@ export class FamilyDetailsPage implements OnInit {
 
   ngOnInit() {
     this.members = [];
+    this.familyName = '';
     this.getFamily();
   }
 
   ionViewWillEnter() {
     this.members = [];
+    this.familyName = '';
     this.getFamily();
   }
 
