@@ -26,10 +26,6 @@ export class ModalPagePage {
     });
   }
 
-  getImage(imageUrl: string): Observable<Blob> {
-    return this.http.get(imageUrl, {responseType: 'blob'});
-  }
-
   allow(b: boolean) {
     this.userData.getUsername().then(u => {
       this.http.post('http://localhost:8282/access/allow/' + u + '/' + b, new HttpHeaders())

@@ -40,7 +40,7 @@ export class ModalControllerService {
     const modal = await this.modalController.create({
       component: ModalPagePage
     });
-    return await modal.present().then(a => this.bogus.setIsActive(true));
+    return await modal.present();
   }
 
 
