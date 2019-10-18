@@ -39,19 +39,19 @@ export class CarsPage implements OnInit {
   }
 
   ionViewWillEnter() {
-    this.plates = [];
-    this.isChecked = false;
-    this.now = new Date();
-    this.tomorrow = new Date();
-    this.tomorrow.setDate(this.tomorrow.getDate() + 1);
-    this.userService.getUsername().then(user => {
-        this.carPlatesService.getAllowedCars(user).subscribe(plates => {
-            this.plates = plates;
-            this._platesSubject.next(plates);
-          }
-        );
-      }
-    )
+    // this.plates = [];
+    // this.isChecked = false;
+    // this.now = new Date();
+    // this.tomorrow = new Date();
+    // this.tomorrow.setDate(this.tomorrow.getDate() + 1);
+    // this.userService.getUsername().then(user => {
+    //     this.carPlatesService.getAllowedCars(user).subscribe(plates => {
+    //         this.plates = plates;
+    //         this._platesSubject.next(plates);
+    //       }
+    //     );
+    //   }
+    // )
   }
 
   removePlate(plateNumber) {
@@ -69,6 +69,9 @@ export class CarsPage implements OnInit {
   }
 
   addLicensePlate() {
+    if(this.plateNumber === '' || this.plateNumber === null || this.plateNumber === undefined) {
+      return;
+    }
     let request: PlateModel;
     if(this.isChecked) {
       request = {
