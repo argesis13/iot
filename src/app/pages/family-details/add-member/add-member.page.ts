@@ -29,8 +29,15 @@ export class AddMemberPage implements OnInit {
         this.members = [];
         console.log(res);
         for (const member of res as UserModel[]) {
-          member['imageUrl'] = '../../assets/img/speakers/bear.jpg';
-          this.members.push(member);
+          this.userService.getUsername().then(
+            username => {
+              if(member.username !== username) {
+                member['imageUrl'] = '../../assets/img/speakers/bear.jpg';
+                this.members.push(member);
+              }
+            }
+          );
+
         }
       })
     ).subscribe();

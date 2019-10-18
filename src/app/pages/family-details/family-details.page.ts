@@ -13,23 +13,31 @@ import {Router} from '@angular/router';
 export class FamilyDetailsPage implements OnInit {
 
   members: UserModel[] = [];
-  familyName = '';
+  familyName: any;
   createFamilyName = '';
 
   constructor(private familyService: FamilyDetailsService,
               private userService: UserData,
-              private router: Router) { }
+              private router: Router) {
+    this.getFamilyId();
+  }
 
   ngOnInit() {
     this.members = [];
-    this.familyName = '';
+    this.getFamilyId();
     this.getFamily();
   }
 
   ionViewWillEnter() {
     this.members = [];
-    this.familyName = '';
+    this.getFamilyId();
     this.getFamily();
+  }
+
+  getFamilyId() {
+    this.userService.getFamilyId().then(resp => {
+      this.familyName = resp;
+    });
   }
 
   getFamily() {
@@ -38,24 +46,21 @@ export class FamilyDetailsPage implements OnInit {
       this.familyService.getFamily(res).pipe(
         map(response => {
           this.members = [];
-          this.familyName = '';
+          // this.familyName = '';
           const members = response['members'];
           for (const member of members) {
             member['imageUrl'] = '../../assets/img/speakers/bear.jpg';
             this.members.push(member as UserModel);
           }
-          this.familyName = response['id'];
         })
-      ).subscribe(caca => {
-        console.log(this.familyName);
-      });
+      ).subscribe();
     });
   }
 
   remove(memberName: string) {
     this.userService.getUsername().then(user => {
       this.familyService.removeFamilyMember(user, memberName).subscribe(
-        res => {
+        () => {
           this.getFamily();
         }
       );
@@ -67,7 +72,9 @@ export class FamilyDetailsPage implements OnInit {
         this.familyService.createFamily(user, familyId).subscribe(
           res => {
             this.familyName = res['id'];
-            this.userService.setFamilyId(res['id']);
+            this.userService.setFamilyId(res['id']).then(() => {
+              this.createFamilyName = '';
+            });
           }
         );
       }

@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CarsPage implements OnInit {
 
+  plates = [];
+
   constructor() { }
 
   ngOnInit() {
