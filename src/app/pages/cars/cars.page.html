@@ -10,15 +10,29 @@
 <ion-content>
   <ion-grid fixed >
     <ion-row>
-      <ion-col size="10">
-        <ion-textarea [(ngModel)]="plateNumber" placeholder="New License Plate"></ion-textarea>
+      <ion-col size="12">
+        <ion-item>
+          <ion-textarea [(ngModel)]="plateNumber" placeholder="New License Plate"></ion-textarea>
+        </ion-item>
+        <ion-item>
+          <ion-label>From</ion-label>
+          <ion-datetime displayFormat="D MMM YYYY H:mm" min="2018" max="2020" value="{{now}}"></ion-datetime>
+        </ion-item>
+        <ion-item>
+          <ion-label>To</ion-label>
+          <ion-datetime displayFormat="D MMM YYYY H:mm" min="2018" max="2020" value="{{tomorrow}}"></ion-datetime>
+        </ion-item>
       </ion-col>
-      <ion-col size="2">
-        <ion-button (click)="addLicensePlate(plateNumber)">
+    </ion-row>
+
+    <ion-row class="ion-no-padding ion-justify-content-center">
+      <ion-col  class="ion-text-center">
+        <ion-button color="primary" (click)="addLicensePlate(plateNumber)">
           <ion-icon name="add"></ion-icon>
         </ion-button>
       </ion-col>
     </ion-row>
+
     <ion-row *ngFor="let plate of plates">
 
     </ion-row>
