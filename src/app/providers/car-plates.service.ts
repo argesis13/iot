@@ -6,7 +6,7 @@ import {PlateModel} from "../interfaces/plate-model";
 @Injectable({
   providedIn: 'root'
 })
-export class CarsServiceService {
+export class CarPlatesService {
 
   constructor(private http: HttpClient) {
 

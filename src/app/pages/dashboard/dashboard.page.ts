@@ -4,6 +4,7 @@ import {FamilyDetailsService} from '../../providers/family-details.service';
 import {UserData} from '../../providers/user-data';
 import {Subscription} from 'rxjs';
 import {ParkingService} from '../../providers/parking.service';
+import {CarPlatesService} from "../../providers/car-plates.service";
 
 @Component({
   selector: 'dashboard',
@@ -19,7 +20,9 @@ export class DashboardPage implements OnInit {
 
   constructor(private router: Router,
               private familyService: FamilyDetailsService,
-              private userService: UserData, private parkingService: ParkingService) {
+              private userService: UserData,
+              private parkingService: ParkingService,
+              private carPlatesService: CarPlatesService) {
   }
 
   ngOnInit() {
@@ -39,6 +42,15 @@ export class DashboardPage implements OnInit {
         const pa = JSON.parse(message);
         this.parkingTotal = pa['slots'].length;
       });
+
+    this.cars = 0;
+    this.userService.getUsername().then(username => {
+      this.carPlatesService.getAllowedCars(username).subscribe(plates => {
+          let array = plates as [];
+          this.cars = array.length;
+        }
+      );
+    });
   }
 
   ionViewWillEnter() {
@@ -49,6 +61,14 @@ export class DashboardPage implements OnInit {
             this.members = response;
           }
         );
+    });
+    this.cars = 0;
+    this.userService.getUsername().then(username => {
+      this.carPlatesService.getAllowedCars(username).subscribe(plates => {
+          let array = plates as [];
+          this.cars = array.length;
+        }
+      );
     });
   }
 

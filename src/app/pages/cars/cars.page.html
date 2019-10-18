@@ -16,25 +16,44 @@
         </ion-item>
         <ion-item>
           <ion-label>From</ion-label>
-          <ion-datetime displayFormat="D MMM YYYY H:mm" min="2018" max="2020" value="{{now}}"></ion-datetime>
+          <ion-datetime displayFormat="D MMM YYYY H:mm" min="2018" max="2020" value="{{now}}" (ionChange)="changeNow($event)" [disabled]="isChecked"></ion-datetime>
         </ion-item>
         <ion-item>
           <ion-label>To</ion-label>
-          <ion-datetime displayFormat="D MMM YYYY H:mm" min="2018" max="2020" value="{{tomorrow}}"></ion-datetime>
+          <ion-datetime displayFormat="D MMM YYYY H:mm" min="2018" max="2020" value="{{tomorrow}}" (ionChange)="changeTomorrow($event)" [disabled]="isChecked"></ion-datetime>
         </ion-item>
       </ion-col>
     </ion-row>
 
     <ion-row class="ion-no-padding ion-justify-content-center">
-      <ion-col  class="ion-text-center">
-        <ion-button color="primary" (click)="addLicensePlate(plateNumber)">
+      <ion-col size="9">
+        <ion-item >
+          <ion-label>Unlimited</ion-label>
+          <ion-checkbox slot="end" [(ngModel)]="isChecked"></ion-checkbox>
+        </ion-item>
+      </ion-col>
+      <ion-col size="3" class="ion-text-right">
+        <ion-button color="primary" (click)="addLicensePlate()">
           <ion-icon name="add"></ion-icon>
         </ion-button>
       </ion-col>
     </ion-row>
 
-    <ion-row *ngFor="let plate of plates">
+    <ion-row>
+      <ion-col size="12" class="ion-text-center">
+        <ion-item>Allowed Plates:</ion-item>
+      </ion-col>
+    </ion-row>
 
+    <ion-row *ngFor="let plate of platesSubject | async">
+      <ion-col size="9">
+        <ion-item>{{plate.number}}</ion-item>
+      </ion-col>
+      <ion-col size="3" class="ion-text-right">
+        <ion-button color="danger" (click)="removePlate()">
+          <ion-icon name="remove"></ion-icon>
+        </ion-button>
+      </ion-col>
     </ion-row>
     <!--<ion-row class="ion-align-items-stretch">-->
 
