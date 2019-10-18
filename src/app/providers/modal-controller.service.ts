@@ -27,7 +27,7 @@ export class ModalControllerService {
         .subscribe(message => {
           console.log(message);
           if (message.includes('PENDING')) {
-            this.presentModal().then(a => this.bogus.setIsActive(true));
+            this.presentModal();
           }
         });
     });
@@ -40,6 +40,7 @@ export class ModalControllerService {
     const modal = await this.modalController.create({
       component: ModalPagePage
     });
+    this.bogus.setIsActive(true);
     return await modal.present();
   }
 

@@ -1,6 +1,5 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable} from 'rxjs';
 import {ModalController} from '@ionic/angular';
 import {BogusService} from '../../bogus.service';
 import {UserData} from '../../providers/user-data';
@@ -10,7 +9,7 @@ import {UserData} from '../../providers/user-data';
   templateUrl: './modal-page.page.html',
   styleUrls: ['./modal-page.page.scss'],
 })
-export class ModalPagePage {
+export class ModalPagePage implements OnInit {
 
   private picture: any;
 
@@ -21,8 +20,11 @@ export class ModalPagePage {
 
 
   ionViewWillEnter() {
+    this.picture = '';
     this.userData.getUsername().then(u => {
-      this.picture = 'http://localhost:8282/access/picture/' + u;
+      console.log(u + 'view enter');
+      this.picture = 'http://localhost:8282/access/picture/' + u + '/' + new Date().getMilliseconds();
+      console.log(this.picture);
     });
   }
 
@@ -30,7 +32,8 @@ export class ModalPagePage {
     this.userData.getUsername().then(u => {
       this.http.post('http://localhost:8282/access/allow/' + u + '/' + b, new HttpHeaders())
         .subscribe(r => console.log('allow: ' + b));
-      this.modalController.dismiss().then(a => this.bogus.setIsActive(false));
+      this.bogus.setIsActive(false);
+      this.modalController.dismiss();
     });
   }
 
