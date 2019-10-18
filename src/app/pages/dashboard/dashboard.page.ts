@@ -13,11 +13,13 @@ export class DashboardPage implements OnInit {
 
   members = 0;
   private sseStream: Subscription;
+  cars = 0;
 
   constructor(private router: Router, private familyService: FamilyDetailsService, private userService: UserData) {
   }
 
   ngOnInit() {
+    this.members = 0;
     this.userService.getUsername().then(res => {
     this.members = 0;
       this.familyService.getFamilyNumber(res).subscribe(
@@ -25,17 +27,19 @@ export class DashboardPage implements OnInit {
           this.members = response;
         }
       );
+      this.familyService.getFamily(res).subscribe();
     });
   }
 
   ionViewWillEnter() {
+    this.members = 0;
     this.userService.getUsername().then(res => {
-      this.members = 0;
         this.familyService.getFamilyNumber(res).subscribe(
           response => {
             this.members = response;
           }
         );
+        this.familyService.getFamily(res).subscribe();
     });
   }
 

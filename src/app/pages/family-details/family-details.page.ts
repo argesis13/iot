@@ -21,20 +21,22 @@ export class FamilyDetailsPage implements OnInit {
               private router: Router) { }
 
   ngOnInit() {
+    this.members = [];
     this.getFamily();
   }
 
   ionViewWillEnter() {
+    this.members = [];
     this.getFamily();
   }
 
   getFamily() {
-    this.members = [];
-    this.familyName = '';
     this.userService.getUsername().then(res => {
       console.log(res);
       this.familyService.getFamily(res).pipe(
         map(response => {
+          this.members = [];
+          this.familyName = '';
           const members = response['members'];
           for (const member of members) {
             member['imageUrl'] = '../../assets/img/speakers/bear.jpg';
