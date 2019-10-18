@@ -18,6 +18,7 @@ export class DashboardPage implements OnInit {
   }
 
   ngOnInit() {
+    this.members = 0;
     this.userService.getUsername().then(res => {
     this.members = 0;
       this.familyService.getFamilyNumber(res).subscribe(
@@ -25,17 +26,19 @@ export class DashboardPage implements OnInit {
           this.members = response;
         }
       );
+      this.familyService.getFamily(res).subscribe();
     });
   }
 
   ionViewWillEnter() {
+    this.members = 0;
     this.userService.getUsername().then(res => {
-      this.members = 0;
         this.familyService.getFamilyNumber(res).subscribe(
           response => {
             this.members = response;
           }
         );
+        this.familyService.getFamily(res).subscribe();
     });
   }
 

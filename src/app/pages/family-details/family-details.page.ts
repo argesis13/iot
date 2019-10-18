@@ -21,10 +21,12 @@ export class FamilyDetailsPage implements OnInit {
               private router: Router) { }
 
   ngOnInit() {
+    this.members = [];
     this.getFamily();
   }
 
   ionViewWillEnter() {
+    this.members = [];
     this.getFamily();
   }
 
