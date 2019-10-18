@@ -1,8 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {ModalController} from '@ionic/angular';
-import {ModalControllerService} from '../../providers/modal-controller.service';
 import {BogusService} from '../../bogus.service';
 import {UserData} from '../../providers/user-data';
 
@@ -11,21 +10,20 @@ import {UserData} from '../../providers/user-data';
   templateUrl: './modal-page.page.html',
   styleUrls: ['./modal-page.page.scss'],
 })
-export class ModalPagePage implements OnInit {
+export class ModalPagePage {
 
   private picture: any;
 
   constructor(private http: HttpClient, private modalController: ModalController
-              , private bogus:  BogusService,
+    , private bogus: BogusService,
               private userData: UserData) {
   }
 
-  ngOnInit() {
-    this.userData.getUsername().then(u => {
-      this.getImage('http://localhost:8282/access/' + u + '/petrescu')
-        .subscribe(p => this.picture = p);
-    });
 
+  ionViewWillEnter() {
+    this.userData.getUsername().then(u => {
+      this.picture = 'http://localhost:8282/access/picture/' + u;
+    });
   }
 
   getImage(imageUrl: string): Observable<Blob> {
