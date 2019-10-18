@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ParkingService} from '../../providers/parking.service';
 
 @Component({
   selector: 'parking-area',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ParkingAreaPage implements OnInit {
 
-  constructor() { }
+  private parkingArea;
+
+  constructor(private parkingService: ParkingService) { }
 
   ngOnInit() {
+    const parkingArea = this.parkingService.getParkingAreaLive()
+      .subscribe(message => {
+        this.parkingArea = JSON.parse(message);
+        console.log(this.parkingArea);
+      });
   }
 
 }
