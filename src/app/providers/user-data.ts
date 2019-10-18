@@ -42,7 +42,7 @@ export class UserData {
               return this.setUsername(username).then(() => {
                 console.log('response' + response['familyId']);
                 if(response['familyId'] != null || response['familyId'] != undefined) {
-                   this.setFamilyId(response['familyId'])
+                   this.setFamilyId(response['familyId']);
                 }
                 return this.events.publish('user:login');
               });

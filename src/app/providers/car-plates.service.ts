@@ -19,4 +19,8 @@ export class CarPlatesService {
   public addCar(username: string, plate: PlateModel) {
     return this.http.put('http://localhost:8282/users/' + username + '/plates', plate);
   }
+
+  public removePlate(username: string, plateId: string) {
+    return this.http.delete('http://localhost:8282/users/' + username + '/plates/' + plateId );
+  }
 }
