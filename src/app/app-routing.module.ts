@@ -37,7 +37,8 @@ const routes: Routes = [
     canLoad: [AuthGuard]
   },
   { path: 'alerts', loadChildren: './pages/alerts/alerts.module#AlertsPageModule' },
-  { path: 'modal-page', loadChildren: './pages/modal-page/modal-page.module#ModalPagePageModule' }
+  { path: 'modal-page', loadChildren: './pages/modal-page/modal-page.module#ModalPagePageModule' },
+  { path: 'cars', loadChildren: './pages/cars/cars.module#CarsPageModule' }
 
 ];
 

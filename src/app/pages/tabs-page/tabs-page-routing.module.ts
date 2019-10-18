@@ -72,9 +72,13 @@ const routes: Routes = [
         ]
       },
       {
-        path: '',
-        redirectTo: '/app/tabs/schedule',
-        pathMatch: 'full'
+        path: 'cars',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('../cars/cars.module').then(m => m.CarsPageModule)
+          }
+        ]
       }
     ]
   }

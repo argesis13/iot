@@ -38,15 +38,73 @@ export class NfcPage implements OnInit {
     });
   }
 
-  write() {
-    this.nfc.beginSession((data) => {},
-      (err) => {}
-    ).subscribe((event) => {
-      this.nfc.addNdefListener((onSuccess) => {}
-      ).subscribe((next) => {
+  enabled() {
+    this.nfc.enabled().then(res => {
+      console.log(res);
+    })
+  }
 
-      });
+  beginSession() {
+    this.nfc.beginSession(success => {
+      console.log(success);
+    }).subscribe(res => {
+      console.log(res);
+    })
+  }
+
+
+  addListener() {
+    console.log('add listener');
+    this.nfc.addNdefListener(success => {
+      console.log('success');
+    }).subscribe(res => {
+      console.log(res.tag.id);
     });
+    // this.nfc.beginSession(success => {
+    //   console.log('begin session');
+    // }).subscribe(
+    //   res => {
+    //     console.log('res');
+    //     this.nfc.addNdefListener(success => {
+    //       console.log('success');
+    //     }).subscribe(res => {
+    //       console.log(res.tag.id);
+    //     });
+    //   }
+    // )
+  }
+
+  write() {
+    this.nfc.write(['bla']).then(res => {
+      console.log(res);
+    });
+    // this.nfc.beginSession(success => {
+    //   this.nfc.write(['bla']).then(res => {
+    //     console.log(res);
+    //   });
+    // }).subscribe();
+  }
+
+  share() {
+    this.nfc.share(['bla']).then(res => {
+      console.log(res);
+    })
+    // this.nfc.beginSession(success => {
+    //   this.nfc.share(['bla']).then(res => {
+    //     console.log(res);
+    //   })
+    // }).subscribe();
+  }
+
+  showSettings() {
+    this.nfc.showSettings().then(res => {
+      console.log(res);
+    });
+    // this.nfc.beginSession(success => {
+    //   this.nfc.showSettings().then(res => {
+    //     console.log(res);
+    //   });
+    // }).subscribe();
   }
 
 }

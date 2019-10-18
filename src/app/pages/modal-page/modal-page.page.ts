@@ -9,7 +9,7 @@ import {UserData} from '../../providers/user-data';
   templateUrl: './modal-page.page.html',
   styleUrls: ['./modal-page.page.scss'],
 })
-export class ModalPagePage implements OnInit {
+export class ModalPagePage {
 
   private picture: any;
 
