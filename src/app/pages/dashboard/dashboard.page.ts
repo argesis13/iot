@@ -14,7 +14,7 @@ export class DashboardPage implements OnInit {
   members = 0;
   cars = 0;
   private parkingTotal = 0;
-  private parkingAvailable = 0;
+  private parkingOccupied = 0;
 
   constructor(private router: Router,
               private familyService: FamilyDetailsService,
@@ -39,10 +39,10 @@ export class DashboardPage implements OnInit {
         const pa = JSON.parse(message);
         const slots: [] = pa['slots'];
         this.parkingTotal = slots.length;
-        this.parkingAvailable = 0;
+        this.parkingOccupied = 0;
         slots.forEach(slot => {
           if (slot['status'] === 'OCCUPIED') {
-            this.parkingAvailable += 1;
+            this.parkingOccupied += 1;
           }
         });
       });
@@ -62,4 +62,5 @@ export class DashboardPage implements OnInit {
   goToFamilyDetails() {
     this.router.navigateByUrl('/app/tabs/family-details/members');
   }
+
 }

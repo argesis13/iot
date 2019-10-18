@@ -78,11 +78,12 @@
                     <!--Light: no triggers created-->
                     <!--</h1>-->
                     <!--</ion-text>-->
-                    <ion-text color="danger">
+                    <ion-text color="{{parkingAvailable == parkingTotal?'danger': 'primary'}}">
                       <h1>
-                        Total nr of Parking:
+                        Available parking slots:
                       </h1>
-                      <h1> {{parkingAvailable}} / {{parkingTotal}} </h1>
+                      <h1 *ngIf="parkingAvailable != parkingTotal"> {{parkingAvailable}} / {{parkingTotal}} </h1>
+                      <h1 *ngIf="parkingAvailable == parkingTotal"> PARKING IS FULL </h1>
                     </ion-text>
                   </ion-list>
                 </ion-col>
