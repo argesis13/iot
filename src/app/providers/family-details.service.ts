@@ -37,4 +37,15 @@ export class FamilyDetailsService {
     return this.http.put('http://localhost:8282/users/' + username + '/family/add', memberUsername);
   }
 
+  public removeFamilyMember(username: string, member: string): Observable<any> {
+    return this.http.delete('http://localhost:8282/users/' + username + '/family/' + member);
+  }
+
+  public createFamily(username: string, familyId: string): Observable<any> {
+    const request = {
+      id : familyId
+    };
+    return this.http.post('http://localhost:8282/users/' + username + '/family', request);
+  }
+
 }

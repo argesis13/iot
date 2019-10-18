@@ -13,6 +13,8 @@ import {Router} from '@angular/router';
 export class FamilyDetailsPage implements OnInit {
 
   members: UserModel[] = [];
+  familyName = '';
+  createFamilyName = '';
 
   constructor(private familyService: FamilyDetailsService,
               private userService: UserData,
@@ -27,31 +29,45 @@ export class FamilyDetailsPage implements OnInit {
   }
 
   getFamily() {
+    this.members = [];
+    this.familyName = '';
     this.userService.getUsername().then(res => {
       console.log(res);
       this.familyService.getFamily(res).pipe(
         map(response => {
           const members = response['members'];
-          this.members = [];
           for (const member of members) {
             member['imageUrl'] = '../../assets/img/speakers/bear.jpg';
             this.members.push(member as UserModel);
           }
+          this.familyName = response['id'];
         })
-      ).subscribe();
+      ).subscribe(caca => {
+        console.log(this.familyName);
+      });
     });
   }
 
   remove(memberName: string) {
-    console.log(memberName);
-    for (const member of this.members) {
-      if (member.username === memberName) {
-        const index = this.members.indexOf(member, 0);
-        if (index > -1) {
-          this.members.splice(index, 1);
+    this.userService.getUsername().then(user => {
+      this.familyService.removeFamilyMember(user, memberName).subscribe(
+        res => {
+          this.getFamily();
         }
+      );
+    });
+  }
+
+  createFamily(familyId: string) {
+    this.userService.getUsername().then(user => {
+        this.familyService.createFamily(user, familyId).subscribe(
+          res => {
+            this.familyName = res['id'];
+            this.userService.setFamilyId(res['id']);
+          }
+        );
       }
-    }
+    );
   }
 
   contact(member) {
