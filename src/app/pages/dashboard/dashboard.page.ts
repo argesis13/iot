@@ -20,8 +20,7 @@ export class DashboardPage implements OnInit {
   constructor(private router: Router,
               private familyService: FamilyDetailsService,
               private userService: UserData,
-              private parkingService: ParkingService) {
-              private userService: UserData,
+              private parkingService: ParkingService,
               private carPlatesService: CarPlatesService) {
   }
 
