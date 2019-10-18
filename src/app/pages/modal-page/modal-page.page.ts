@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {ModalController} from '@ionic/angular';
 import {BogusService} from '../../bogus.service';
@@ -32,8 +32,7 @@ export class ModalPagePage {
     this.userData.getUsername().then(u => {
       this.http.post('http://localhost:8282/access/allow/' + u + '/' + b, new HttpHeaders())
         .subscribe(r => console.log('allow: ' + b));
-      this.bogus.setIsActive(false);
-      this.modalController.dismiss();
+      this.modalController.dismiss().then(a => this.bogus.setIsActive(false));
     });
   }
 
