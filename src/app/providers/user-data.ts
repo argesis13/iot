@@ -39,9 +39,13 @@ export class UserData {
       map(response => {
           if (response['username'] === username) {
             return this.storage.set(this.HAS_LOGGED_IN, true).then(() => {
-              this.setUsername(username);
-              this.setFamilyId(response['familyId']);
-              return this.events.publish('user:login');
+              return this.setUsername(username).then(() => {
+                console.log('response' + response['familyId']);
+                if(response['familyId'] != null || response['familyId'] != undefined) {
+                   this.setFamilyId(response['familyId'])
+                }
+                return this.events.publish('user:login');
+              });
             });
           } else {
             return this.storage.set(this.HAS_LOGGED_IN, false);
@@ -56,7 +60,7 @@ export class UserData {
       map(res => {
         console.log(res);
         this.storage.set(this.HAS_LOGGED_IN, true).then(() => {
-          console.log(username);
+          this.storage.remove('familyId');
           this.setUsername(username);
           return this.events.publish('user:signup');
         });
@@ -66,9 +70,11 @@ export class UserData {
 
   logout(): Promise<any> {
     return this.storage.remove(this.HAS_LOGGED_IN).then(() => {
-      return this.storage.remove('username');
-    }).then(() => {
-      this.events.publish('user:logout');
+      return this.storage.remove('username').then(() => {
+        return this.storage.remove('familyId').then(() => {
+          return this.events.publish('user:logout')}
+        );
+      });
     });
   }
 

@@ -27,7 +27,6 @@ export class DashboardPage implements OnInit {
           this.members = response;
         }
       );
-      this.familyService.getFamily(res).subscribe();
     });
   }
 
@@ -39,7 +38,6 @@ export class DashboardPage implements OnInit {
             this.members = response;
           }
         );
-        this.familyService.getFamily(res).subscribe();
     });
   }
 
