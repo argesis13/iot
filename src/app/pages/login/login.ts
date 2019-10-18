@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { UserData } from '../../providers/user-data';
 
 import { UserOptions } from '../../interfaces/user-options';
+import {ModalControllerService} from '../../providers/modal-controller.service';
 
 @Component({
   selector: 'page-login',
@@ -17,7 +18,8 @@ export class LoginPage {
 
   constructor(
     public userData: UserData,
-    public router: Router
+    public router: Router,
+    public modalControllerService: ModalControllerService
   ) { }
 
   onLogin(form: NgForm) {
@@ -28,6 +30,7 @@ export class LoginPage {
           this.userData.isLoggedIn().then(
             loggedIn => {
               if (loggedIn) {
+                this.modalControllerService.refresh();
                 this.router.navigateByUrl('/app/tabs/dashboard');
               }
             }
