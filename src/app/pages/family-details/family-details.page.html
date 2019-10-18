@@ -3,14 +3,28 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Family Details</ion-title>
+    <ion-text *ngIf="familyName !== ''" slot="end">{{familyName}}</ion-text>
+    <ion-title>Family Details </ion-title>
   </ion-toolbar>
+  <div *ngIf="familyName === ''">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-textarea [(ngModel)]="createFamilyName" placeholder="New Family Name"></ion-textarea>
+        </ion-col>
+        <ion-col>
+          <ion-button (click)="createFamily(createFamilyName)">Create Family</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
 </ion-header>
 <ion-content>
 
 <ion-content>
-  <ion-grid fixed>
+  <ion-grid fixed *ngIf="members.length > 0">
     <ion-row class="ion-align-items-stretch">
+
       <ion-col size="12" size-md="6" *ngFor="let member of members">
         <ion-card class="speaker-card">
           <ion-card-header>
