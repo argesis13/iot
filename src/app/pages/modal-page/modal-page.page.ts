@@ -1,25 +1,29 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {ModalController} from '@ionic/angular';
-import {ModalControllerService} from '../../providers/modal-controller.service';
 import {BogusService} from '../../bogus.service';
+import {UserData} from '../../providers/user-data';
 
 @Component({
   selector: 'modal-page',
   templateUrl: './modal-page.page.html',
   styleUrls: ['./modal-page.page.scss'],
 })
-export class ModalPagePage implements OnInit {
+export class ModalPagePage {
 
   private picture: any;
 
-  constructor(private http: HttpClient, private modalController: ModalController, private bogus:  BogusService) {
+  constructor(private http: HttpClient, private modalController: ModalController
+    , private bogus: BogusService,
+              private userData: UserData) {
   }
 
-  ngOnInit() {
-    this.getImage('http://localhost:8282/access/picture/petrescu')
-      .subscribe(p => this.picture = p);
+
+  ionViewWillEnter() {
+    this.userData.getUsername().then(u => {
+      this.picture = 'http://localhost:8282/access/picture/' + u;
+    });
   }
 
   getImage(imageUrl: string): Observable<Blob> {
@@ -27,9 +31,11 @@ export class ModalPagePage implements OnInit {
   }
 
   allow(b: boolean) {
-    this.http.post('http://localhost:8282/access/allow/petrescu/' + b, new HttpHeaders())
-      .subscribe(r => console.log('allow: ' + b));
-    this.modalController.dismiss().then(a => this.bogus.setIsActive(false));
+    this.userData.getUsername().then(u => {
+      this.http.post('http://localhost:8282/access/allow/' + u + '/' + b, new HttpHeaders())
+        .subscribe(r => console.log('allow: ' + b));
+      this.modalController.dismiss().then(a => this.bogus.setIsActive(false));
+    });
   }
 
 }
