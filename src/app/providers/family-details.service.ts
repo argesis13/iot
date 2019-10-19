@@ -27,8 +27,8 @@ export class FamilyDetailsService {
     );
   }
 
-  public searchMember(username: String): Observable<any> {
-    return this.http.get('http://localhost:8282/users/search?username=' + username);
+  public searchMember(username: string, queryText: string): Observable<any> {
+    return this.http.get('http://localhost:8282/users/' + username + '/search?username=' + queryText);
   }
 
   public addFamilyMember(username: string, member: UserModel) {

@@ -29,27 +29,32 @@ export class AddMemberPage implements OnInit {
       this._membersSubject.next(this.members);
       return;
     }
-    this.familyService.searchMember(this.queryText).pipe(
-      map(res => {
-        for (const member of res as UserModel[]) {
-          this.userService.getUsername().then(
-            username => {
-              if(member.username !== username) {
-                member['imageUrl'] = '../../assets/img/speakers/bear.jpg';
-                this.members.push(member);
+    this.userService.getUsername().then(username => {
+      this.familyService.searchMember(username, this.queryText).pipe(
+        map(res => {
+          for (const member of res as UserModel[]) {
+            this.userService.getUsername().then(
+              username => {
+                if(member.username !== username) {
+                  member['imageUrl'] = '../../assets/img/speakers/bear.jpg';
+                  this.members.push(member);
+                }
               }
-            }
-          );
-        }
-        this._membersSubject.next(this.members);
-      })
-    ).subscribe();
+            );
+          }
+          this._membersSubject.next(this.members);
+        })
+      ).subscribe();
+    });
   }
 
   addToFamily(member: UserModel) {
     this.userService.getUsername().then(
       username => {
-      this.familyService.addFamilyMember(username, member).subscribe();
+      this.familyService.addFamilyMember(username, member).subscribe(fam => {
+
+        }
+      );
     });
   }
 }
