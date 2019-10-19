@@ -18,6 +18,7 @@ export class CarsPage implements OnInit {
   tomorrow: Date;
   isChecked: false;
   plateNumber: string;
+  placeholder = "License Plate Number...";
 
   constructor(private carPlatesService: CarPlatesService, private userService: UserData) { }
 
@@ -39,19 +40,38 @@ export class CarsPage implements OnInit {
 
   ionViewWillEnter() {
     // this.plates = [];
+    // this.isChecked = false;
     // this.now = new Date();
     // this.tomorrow = new Date();
     // this.tomorrow.setDate(this.tomorrow.getDate() + 1);
     // this.userService.getUsername().then(user => {
     //     this.carPlatesService.getAllowedCars(user).subscribe(plates => {
     //         this.plates = plates;
+    //         this._platesSubject.next(plates);
     //       }
     //     );
     //   }
     // )
   }
 
+  removePlate(plateNumber) {
+    this.userService.getUsername().then(user => {
+      this.carPlatesService.removePlate(user, plateNumber).subscribe(() => {
+        this.carPlatesService.getAllowedCars(user).subscribe(plates => {
+            console.log(plates);
+            this.plates = plates;
+            this._platesSubject.next(plates);
+          }
+        );
+        }
+      );
+    });
+  }
+
   addLicensePlate() {
+    if(this.plateNumber === '' || this.plateNumber === null || this.plateNumber === undefined) {
+      return;
+    }
     let request: PlateModel;
     if(this.isChecked) {
       request = {
@@ -71,26 +91,21 @@ export class CarsPage implements OnInit {
               this.carPlatesService.getAllowedCars(user).subscribe(plates => {
                   this.plates = plates;
                   this._platesSubject.next(plates);
+                  this.plateNumber = '';
                 }
               );
             }
           )
         }
       )
-    console.log(this.isChecked + ' ' + this.now + ' ' + this.tomorrow + ' ' + this.plateNumber);
   }
-
-  getPlates() {
-    return this._platesSubject.asObservable();
-  }
-
 
   changeNow(date) {
-    this.now = date.detail.value;
+    this.now = new Date(date.detail.value);
   }
 
   changeTomorrow(date) {
-    this.tomorrow = date.detail.value;
+    this.tomorrow = new Date(date.detail.value);
   }
 
 }
