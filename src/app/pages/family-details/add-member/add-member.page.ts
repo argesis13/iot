@@ -3,6 +3,8 @@ import {UserModel} from '../../../interfaces/user-model';
 import {map} from 'rxjs/operators';
 import {FamilyDetailsService} from '../../../providers/family-details.service';
 import {UserData} from '../../../providers/user-data';
+import {PlateModel} from "../../../interfaces/plate-model";
+import {BehaviorSubject} from "rxjs";
 
 @Component({
   selector: 'add-member',
@@ -13,6 +15,8 @@ export class AddMemberPage implements OnInit {
 
   queryText = '';
   members: UserModel[] = [];
+  _membersSubject = new BehaviorSubject<UserModel[]>([]);
+  readonly membersSubject = this._membersSubject.asObservable();
 
   constructor(private familyService: FamilyDetailsService, private userService: UserData) { }
 
@@ -20,14 +24,35 @@ export class AddMemberPage implements OnInit {
   }
 
   search() {
+    // if (this.queryText === '') {
+    //   this.members = [];
+    //   this._membersSubject.next(this.members);
+    //   return;
+    // }
+    // this.familyService.searchMember(this.queryText).pipe(
+    //   map(res => {
+    //     this.members = [];
+    //     console.log(res);
+    //     for (const member of res as UserModel[]) {
+    //       this.userService.getUsername().then(
+    //         username => {
+    //           if(member.username !== username) {
+    //             member['imageUrl'] = '../../assets/img/speakers/bear.jpg';
+    //             this.members.push(member);
+    //           }
+    //         }
+    //       );
+    //
+    //     }
+    //   })
+    // ).subscribe();
     if (this.queryText === '') {
       this.members = [];
+      this._membersSubject.next(this.members);
       return;
     }
     this.familyService.searchMember(this.queryText).pipe(
       map(res => {
-        this.members = [];
-        console.log(res);
         for (const member of res as UserModel[]) {
           this.userService.getUsername().then(
             username => {
@@ -37,8 +62,8 @@ export class AddMemberPage implements OnInit {
               }
             }
           );
-
         }
+        this._membersSubject.next(this.members);
       })
     ).subscribe();
   }
@@ -46,7 +71,7 @@ export class AddMemberPage implements OnInit {
   addToFamily(member: UserModel) {
     this.userService.getUsername().then(
       username => {
-        console.log(username);
+        console.log(member);
       this.familyService.addFamilyMember(username, member).subscribe();
     });
   }

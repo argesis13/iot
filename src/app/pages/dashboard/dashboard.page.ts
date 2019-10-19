@@ -40,7 +40,11 @@ export class DashboardPage implements OnInit {
       .subscribe(message => {
         const pa = JSON.parse(message);
         const slots: [] = pa['slots'];
-        this.parkingTotal = slots.length;
+        if(slots === undefined || slots === null) {
+          this.parkingTotal = 0;
+        } else {
+          this.parkingTotal = slots.length;
+        }
         this.parkingOccupied = 0;
         slots.forEach(slot => {
           if (slot['status'] === 'OCCUPIED') {
@@ -53,7 +57,12 @@ export class DashboardPage implements OnInit {
     this.userService.getUsername().then(username => {
       this.carPlatesService.getAllowedCars(username).subscribe(plates => {
           let array = plates as [];
-          this.cars = array.length;
+          if(array === undefined || array === null) {
+            this.cars = 0;
+          } else {
+            this.cars = array.length;
+          }
+
         }
       );
     });
@@ -71,10 +80,13 @@ export class DashboardPage implements OnInit {
     this.cars = 0;
     this.userService.getUsername().then(username => {
       this.carPlatesService.getAllowedCars(username).subscribe(plates => {
-          let array = plates as [];
+        let array = plates as [];
+        if(array === undefined || array === null) {
+          this.cars = 0;
+        } else {
           this.cars = array.length;
         }
-      );
+      });
     });
   }
 
