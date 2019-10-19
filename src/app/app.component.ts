@@ -47,8 +47,6 @@ export class AppComponent implements OnInit {
       url: '/app/tabs/map',
       icon: 'map'
     }
-
-    // <ion-icon name="flashlight"></ion-icon>
   ];
   loggedIn = false;
   dark = false;

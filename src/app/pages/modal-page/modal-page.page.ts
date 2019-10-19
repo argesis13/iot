@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {ModalController} from '@ionic/angular';
 import {BogusService} from '../../bogus.service';
 import {UserData} from '../../providers/user-data';
+import {EnvService} from "../../providers/env.service";
 
 @Component({
   selector: 'modal-page',
@@ -15,7 +16,8 @@ export class ModalPagePage {
 
   constructor(private http: HttpClient, private modalController: ModalController
     , private bogus: BogusService,
-              private userData: UserData) {
+              private userData: UserData,
+              private env: EnvService) {
   }
 
 
@@ -23,14 +25,14 @@ export class ModalPagePage {
     this.picture = '';
     this.userData.getUsername().then(u => {
       console.log(u + 'view enter');
-      this.picture = 'http://localhost:8282/access/picture/' + u + '/' + new Date().getMilliseconds();
+      this.picture = this.env.url + 'access/picture/' + u + '/' + new Date().getMilliseconds();
       console.log(this.picture);
     });
   }
 
   allow(b: boolean) {
     this.userData.getUsername().then(u => {
-      this.http.post('http://localhost:8282/access/allow/' + u + '/' + b, new HttpHeaders())
+      this.http.post(this.env.url + 'access/allow/' + u + '/' + b, new HttpHeaders())
         .subscribe(r => console.log('allow: ' + b));
       this.modalController.dismiss().then(a => this.bogus.setIsActive(false));
     });
