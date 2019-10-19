@@ -49,7 +49,6 @@ export class AddMemberPage implements OnInit {
   addToFamily(member: UserModel) {
     this.userService.getUsername().then(
       username => {
-        console.log(member);
       this.familyService.addFamilyMember(username, member).subscribe();
     });
   }

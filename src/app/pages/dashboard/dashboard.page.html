@@ -9,90 +9,68 @@
 
 <ion-content>
 
-
   <ion-list>
-    <ion-grid fixed>
-      <ion-row class="ion-align-items-stretch">
-        <ion-col size="12">
-          <ion-card class="speaker-card" [routerLink]="['/app/tabs/family-details/members']">
-            <ion-card-header>
-              <ion-item detail="false" lines="none">
-                <ion-icon slot="start" name="contacts"></ion-icon>
-                Family
-              </ion-item>
-            </ion-card-header>
-            <ion-card-content>
-              <ion-row class="ion-no-padding ion-justify-content-center">
-                <ion-col class="ion-text-center">
-                  <ion-text color="primary">
-                    <h1> Members: {{members}}</h1>
-                  </ion-text>
-                </ion-col>
-              </ion-row>
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+    <ion-card class="speaker-card" [routerLink]="['/app/tabs/family-details/members']">
+      <ion-card-header>
+        <ion-item >
+          <ion-img src="./../../../assets/img/family.png" style="width: 40px; height: 40px;"></ion-img>
+          <ion-label class="ion-text-center">Family</ion-label>
+          <!--<h2 color="primary" text-center>Family</h2>-->
+        </ion-item>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-row class="ion-no-padding ion-justify-content-center">
+          <ion-col class="ion-text-center">
+            <ion-text color="primary">
+              <h1> Members: {{members}}</h1>
+            </ion-text>
+          </ion-col>
+        </ion-row>
+      </ion-card-content>
+    </ion-card>
 
-    <ion-grid fixed>
-      <ion-row class="ion-align-items-stretch">
-        <ion-col size="12">
-          <ion-card class="speaker-card" [routerLink]="['/app/tabs/cars']">
-            <ion-card-header>
-              <ion-item detail="false" lines="none">
-                <ion-icon slot="start" name="car"></ion-icon>
-                Cars
-              </ion-item>
-            </ion-card-header>
-            <ion-card-content>
-              <ion-row class="ion-no-padding ion-justify-content-center">
-                <ion-col class="ion-text-center">
-                  <ion-text color="primary">
-                    <h1> Allowed License Plates: {{cars}}</h1>
-                  </ion-text>
-                </ion-col>
-              </ion-row>
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+    <ion-card class="speaker-card" [routerLink]="['/app/tabs/cars']">
+      <ion-card-header>
+        <ion-item >
+          <ion-img src="./../../../assets/img/car.png" style="width: 40px; height: 40px;"></ion-img>
+          <ion-label class="ion-text-center">Cars</ion-label>
+        </ion-item>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-row class="ion-no-padding ion-justify-content-center">
+          <ion-col class="ion-text-center">
+            <ion-text color="primary">
+              <h1> Allowed License Plates: {{cars}}</h1>
+            </ion-text>
+          </ion-col>
+        </ion-row>
+      </ion-card-content>
+    </ion-card>
 
-    <ion-grid fixed>
-      <ion-row class="ion-align-items-stretch">
-        <ion-col size="12">
-          <ion-card class="speaker-card" [routerLink]="['/app/tabs/parking-area']">
-            <ion-card-header>
-              <ion-item detail="false" lines="none">
-                <ion-icon slot="start" name="alert"></ion-icon>
-                Visitors parking
-              </ion-item>
-            </ion-card-header>
-            <ion-card-content>
-              <ion-row class="ion-no-padding ion-justify-content-center">
-                <ion-col class="ion-text-center">
-                  <ion-list>
-                    <!--<ion-text color="primary">-->
-                    <!--<h1>-->
-                    <!--Light: no triggers created-->
-                    <!--</h1>-->
-                    <!--</ion-text>-->
-                    <ion-text color="{{parkingOccupied == parkingTotal?'danger': 'primary'}}">
-                      <h1>
-                        Available parking slots:
-                      </h1>
-                      <h1 *ngIf="parkingOccupied != parkingTotal"> {{parkingOccupied}} / {{parkingTotal}} </h1>
-                      <h1 *ngIf="parkingOccupied == parkingTotal"> PARKING IS FULL </h1>
-                    </ion-text>
-                  </ion-list>
-                </ion-col>
-              </ion-row>
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+    <ion-card class="speaker-card" [routerLink]="['/app/tabs/parking-area']">
+      <ion-card-header>
+        <ion-item >
+          <ion-img src="./../../../assets/img/parking.png" style="width: 40px; height: 40px;"></ion-img>
+          <ion-label class="ion-text-center">Parking</ion-label>
+        </ion-item>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-row class="ion-no-padding ion-justify-content-center">
+          <ion-col class="ion-text-center">
+            <ion-list>
+
+              <ion-text color="{{parkingOccupied == parkingTotal?'danger': 'primary'}}">
+                <h1>
+                  Available parking slots:
+                </h1>
+                <h1 *ngIf="parkingOccupied != parkingTotal"> {{parkingOccupied}} / {{parkingTotal}} </h1>
+                <h1 *ngIf="parkingOccupied == parkingTotal"> PARKING IS FULL </h1>
+              </ion-text>
+            </ion-list>
+          </ion-col>
+        </ion-row>
+      </ion-card-content>
+    </ion-card>
 
   </ion-list>
 

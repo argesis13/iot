@@ -25,6 +25,12 @@ export class DashboardPage implements OnInit {
   }
 
   ngOnInit() {
+    this.getfamily();
+    this.getParkings();
+    this.getCars();
+  }
+
+  private getfamily() {
     this.members = 0;
     this.userService.getUsername().then(res => {
       this.members = 0;
@@ -35,12 +41,14 @@ export class DashboardPage implements OnInit {
       );
       this.familyService.getFamily(res).subscribe();
     });
+  }
 
+  private getParkings() {
     this.parkingService.getParkingAreaLive()
       .subscribe(message => {
         const pa = JSON.parse(message);
         const slots: [] = pa['slots'];
-        if(slots === undefined || slots === null) {
+        if (slots === undefined || slots === null) {
           this.parkingTotal = 0;
         } else {
           this.parkingTotal = slots.length;
@@ -52,12 +60,14 @@ export class DashboardPage implements OnInit {
           }
         });
       });
+  }
 
+  private getCars() {
     this.cars = 0;
     this.userService.getUsername().then(username => {
       this.carPlatesService.getAllowedCars(username).subscribe(plates => {
           let array = plates as [];
-          if(array === undefined || array === null) {
+          if (array === undefined || array === null) {
             this.cars = 0;
           } else {
             this.cars = array.length;
@@ -77,21 +87,7 @@ export class DashboardPage implements OnInit {
         }
       );
     });
-    this.cars = 0;
-    this.userService.getUsername().then(username => {
-      this.carPlatesService.getAllowedCars(username).subscribe(plates => {
-        let array = plates as [];
-        if(array === undefined || array === null) {
-          this.cars = 0;
-        } else {
-          this.cars = array.length;
-        }
-      });
-    });
-  }
-
-  goToFamilyDetails() {
-    this.router.navigateByUrl('/app/tabs/family-details/members');
+    this.getCars();
   }
 
 }

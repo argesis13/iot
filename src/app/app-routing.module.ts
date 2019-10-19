@@ -38,9 +38,7 @@ const routes: Routes = [
   },
   { path: 'alerts', loadChildren: './pages/alerts/alerts.module#AlertsPageModule' },
   { path: 'modal-page', loadChildren: './pages/modal-page/modal-page.module#ModalPagePageModule' },
-  { path: 'cars', loadChildren: './pages/cars/cars.module#CarsPageModule' },
-  { path: 'parking-area', loadChildren: './pages/parking-area/parking-area.module#ParkingAreaPageModule' }
-
+  { path: 'cars', loadChildren: './pages/cars/cars.module#CarsPageModule' }
 ];
 
 @NgModule({
