@@ -13,7 +13,7 @@ import {ModalControllerService} from '../../providers/modal-controller.service';
   styleUrls: ['./login.scss'],
 })
 export class LoginPage {
-  login: UserOptions = { username: '', password: '' };
+  login: UserOptions = { username: '', password: '', firstName: '', lastName: '', address: ''};
   submitted = false;
 
   constructor(

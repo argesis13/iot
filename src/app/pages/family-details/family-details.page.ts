@@ -54,8 +54,6 @@ export class FamilyDetailsPage implements OnInit {
             member['imageUrl'] = '../../assets/img/speakers/bear.jpg';
           }
           this.members = members;
-          console.log('get family');
-          console.log(this.members);
           this._membersSubject.next(this.members);
         })
       ).subscribe();
@@ -75,30 +73,10 @@ export class FamilyDetailsPage implements OnInit {
             }
           }
           this.members = withoutme;
-          console.log('remove');
-          console.log(this.members);
           this._membersSubject.next(this.members);
         })
       ).subscribe();
     });
-
-    // this.userService.getUsername().then(user => {
-    //   this.familyService.removeFamilyMember(user, memberName).subscribe(
-    //     () => {
-    //       this.familyService.getFamily(user).pipe(
-    //         map(response => {
-    //           const members = response['members'];
-    //           for (const member of members) {
-    //             member['imageUrl'] = '../../assets/img/speakers/bear.jpg';
-    //             this.members.push(member as UserModel);
-    //           }
-    //           console.log(this.members);
-    //           this._membersSubject.next(this.members);
-    //         })
-    //       ).subscribe();
-    //     }
-    //   );
-    // });
   }
 
   createFamily(familyId: string) {
@@ -113,10 +91,6 @@ export class FamilyDetailsPage implements OnInit {
         );
       }
     );
-  }
-
-  contact(member) {
-    console.log('contact');
   }
 
   addMember() {

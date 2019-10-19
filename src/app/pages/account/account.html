@@ -9,20 +9,8 @@
 
 <ion-content>
   <div *ngIf="username" class="ion-padding-top ion-text-center">
-    <img src="https://www.gravatar.com/avatar?d=mm&s=140" alt="avatar">
+    <img src="../../../assets/img/speakers/bear.jpg" alt="avatar">
     <h2>{{username}}</h2>
-
-    <ion-item-group>
-      <ion-list inset>License Plates:
-        <ion-item *ngFor="let plate of plates">{{plate}}</ion-item>
-      </ion-list>
-      <ion-button (click)="addControl()">Add new plate</ion-button>
-    </ion-item-group>
-
-<!--    <ion-list inset>Alerts:-->
-<!--      <ion-item *ngFor="let alert of alerts">Alert</ion-item>-->
-<!--    </ion-list>-->
-<!--    <ion-button (click)="addControl()">Add new alert</ion-button>-->
 
     <ion-list inset>
       <ion-item (click)="updatePicture()">Update Picture</ion-item>
@@ -31,17 +19,6 @@
       <ion-item (click)="support()">Support</ion-item>
       <ion-item (click)="logout()">Logout</ion-item>
     </ion-list>
-
-<!--    <ion-button expand="full" color="light" (click)="addControl()">Add Plate</ion-button>-->
-
-<!--    <ion-list lines="none">-->
-<!--      <form [formGroup]="myForm">-->
-<!--        <ion-item *ngFor="let control of myForm.controls | keyvalue">-->
-<!--          <ion-input required type="text" [formControlName]="control.key" placeHolder="Plates: "></ion-input>-->
-<!--          <ion-icon (click)="removeControl(control)" name="close-circle"></ion-icon>-->
-<!--        </ion-item>-->
-<!--      </form>-->
-<!--    </ion-list>-->
 
   </div>
 

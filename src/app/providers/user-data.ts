@@ -4,6 +4,8 @@ import { Storage } from '@ionic/storage';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
+import {UserModel} from "../interfaces/user-model";
+import {UserOptions} from "../interfaces/user-options";
 
 
 @Injectable({
@@ -55,13 +57,13 @@ export class UserData {
     ).toPromise();
   }
 
-  signup(username: string): Observable<any> {
-    return this.http.post('http://localhost:8282/users/', {username}).pipe(
+  signup(user: UserOptions): Observable<any> {
+    return this.http.post('http://localhost:8282/users/', {username: user}).pipe(
       map(res => {
         console.log(res);
         this.storage.set(this.HAS_LOGGED_IN, true).then(() => {
           this.storage.remove('familyId');
-          this.setUsername(username);
+            this.setUsername(user.username);
           return this.events.publish('user:signup');
         });
       })

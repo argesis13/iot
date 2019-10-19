@@ -24,28 +24,6 @@ export class AddMemberPage implements OnInit {
   }
 
   search() {
-    // if (this.queryText === '') {
-    //   this.members = [];
-    //   this._membersSubject.next(this.members);
-    //   return;
-    // }
-    // this.familyService.searchMember(this.queryText).pipe(
-    //   map(res => {
-    //     this.members = [];
-    //     console.log(res);
-    //     for (const member of res as UserModel[]) {
-    //       this.userService.getUsername().then(
-    //         username => {
-    //           if(member.username !== username) {
-    //             member['imageUrl'] = '../../assets/img/speakers/bear.jpg';
-    //             this.members.push(member);
-    //           }
-    //         }
-    //       );
-    //
-    //     }
-    //   })
-    // ).subscribe();
     if (this.queryText === '') {
       this.members = [];
       this._membersSubject.next(this.members);
