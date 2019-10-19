@@ -20,7 +20,6 @@ export class ModalPagePage {
               private env: EnvService) {
   }
 
-
   ionViewWillEnter() {
     this.picture = '';
     this.userData.getUsername().then(u => {

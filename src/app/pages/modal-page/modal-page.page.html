@@ -6,11 +6,31 @@
 
 <ion-content>
 
+  <ion-card>
+    <ion-card-header>
+      <!--<img src="https://cdn.motor1.com/images/mgl/Z2ZlK/s1/bugatti-la-voiture-noire.jpg">-->
+      <ion-img [src]="picture" [alt]="picture"></ion-img>
+    </ion-card-header>
 
-  <ion-img [src]="picture" [alt]="picture"></ion-img>
+    <ion-card-content>
+      <ion-row class="ion-no-padding ion-justify-content-center">
+        <ion-col class="ion-text-center">
+          <ion-label class="ion-text-center">You have a new access request</ion-label>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
 
-  <ion-buttons>
-    <ion-button (click)="allow(true)">ALLOW</ion-button>
-    <ion-button (click)="allow(false)">DENY</ion-button>
-  </ion-buttons>
+  <ion-fab slot="fixed" vertical="bottom" horizontal="start" #fab>
+    <ion-fab-button (click)="allow(true)" color="success" style="width: 75px; height: 75px">
+      <ion-icon name="checkmark"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end" #fab>
+    <ion-fab-button (click)="allow(false)" color="danger" style="width: 75px; height: 75px">
+      <ion-icon name="close"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
 </ion-content>
