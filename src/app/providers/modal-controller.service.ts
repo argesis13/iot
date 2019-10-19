@@ -4,6 +4,7 @@ import {ModalPagePage} from '../pages/modal-page/modal-page.page';
 import {Observable} from 'rxjs';
 import {BogusService} from '../bogus.service';
 import {UserData} from './user-data';
+import {EnvService} from "./env.service";
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,8 @@ export class ModalControllerService {
   constructor(private modalController: ModalController,
               private navController: NavController,
               private bogus: BogusService,
-              private userData: UserData) {
+              private userData: UserData,
+              private env: EnvService) {
     this.startToListenToAccess();
 
   }
@@ -23,7 +25,7 @@ export class ModalControllerService {
 
   private startToListenToAccess() {
     this.userData.getUsername().then(u => {
-      this.observeMessages('http://localhost:8282/access/query/' + u + '/1000')
+      this.observeMessages(this.env.url + '/access/query/' + u + '/1000')
         .subscribe(message => {
           console.log(message);
           if (message.includes('PENDING')) {

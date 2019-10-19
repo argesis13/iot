@@ -18,6 +18,11 @@
         <ion-img [src]="member.imageUrl" [alt]="member.username + ' picture'" style="width: 40px; height: 40px;"></ion-img>
         <ion-label class="ion-text-center">{{member.username}}</ion-label>
       </ion-item>
+      <ion-text color="danger">
+        <p [hidden]="submitted == false" class="ion-padding-start">
+          Username is required
+        </p>
+      </ion-text>
     </ion-card-header>
 
     <ion-card-content>

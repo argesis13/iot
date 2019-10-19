@@ -17,6 +17,7 @@ export class AddMemberPage implements OnInit {
   members: UserModel[] = [];
   _membersSubject = new BehaviorSubject<UserModel[]>([]);
   readonly membersSubject = this._membersSubject.asObservable();
+  submitted = false;
 
   constructor(private familyService: FamilyDetailsService, private userService: UserData) { }
 
@@ -52,7 +53,7 @@ export class AddMemberPage implements OnInit {
     this.userService.getUsername().then(
       username => {
       this.familyService.addFamilyMember(username, member).subscribe(fam => {
-
+          console.log(fam);
         }
       );
     });

@@ -6,6 +6,7 @@ import {map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {UserModel} from "../interfaces/user-model";
 import {UserOptions} from "../interfaces/user-options";
+import {EnvService} from "./env.service";
 
 
 @Injectable({
@@ -18,7 +19,8 @@ export class UserData {
   constructor(
     public events: Events,
     public storage: Storage,
-    private http: HttpClient
+    private http: HttpClient,
+    private env: EnvService
   ) { }
 
   hasFavorite(sessionName: string): boolean {
@@ -37,7 +39,8 @@ export class UserData {
   }
 
   login(username: string): Promise<any> {
-    return this.http.get('http://localhost:8282/users/' + username).pipe(
+    console.log(this.env.url);
+    return this.http.get(this.env.url + 'users/' + username).pipe(
       map(response => {
           if (response['username'] === username) {
             return this.storage.set(this.HAS_LOGGED_IN, true).then(() => {
@@ -58,7 +61,7 @@ export class UserData {
   }
 
   signup(user: UserOptions): Observable<any> {
-    return this.http.post('http://localhost:8282/users/', {username: user}).pipe(
+    return this.http.post(this.env.url + 'users/', {username: user}).pipe(
       map(res => {
         console.log(res);
         this.storage.set(this.HAS_LOGGED_IN, true).then(() => {

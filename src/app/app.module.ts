@@ -18,6 +18,7 @@ import {StreamingMedia} from '@ionic-native/streaming-media/ngx';
 import {YoutubeVideoPlayer} from '@ionic-native/youtube-video-player/ngx';
 import {ModalPagePage} from './pages/modal-page/modal-page.page';
 import {ModalPagePageModule} from './pages/modal-page/modal-page.module';
+import {EnvService} from "./providers/env.service";
 
 @NgModule({
   entryComponents: [ModalPagePage],
@@ -35,7 +36,7 @@ import {ModalPagePageModule} from './pages/modal-page/modal-page.module';
     })
   ],
   declarations: [AppComponent],
-  providers: [InAppBrowser, SplashScreen, StatusBar, VideoPlayer, NFC, Ndef, StreamingMedia, YoutubeVideoPlayer],
+  providers: [InAppBrowser, SplashScreen, StatusBar, VideoPlayer, NFC, Ndef, StreamingMedia, YoutubeVideoPlayer, EnvService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
