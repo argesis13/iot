@@ -6,9 +6,9 @@ import { Injectable } from '@angular/core';
 export class EnvService {
 
   public dev_url = 'http://localhost:8282/';
-  public prod_url = 'https://cartierul-iot-backend-txxtb4puiq-ew.a.run.app/';
+  public prod_url = 'http://35.232.137.184/';
 
-  public url = this.dev_url;
+  public url = this.prod_url;
 
   constructor() { }
 
