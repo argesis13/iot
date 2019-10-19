@@ -25,7 +25,7 @@ export class SignupPage {
   onSignup(form: NgForm) {
     this.submitted = true;
     if (form.valid) {
-      this.userData.signup(this.signup).subscribe(res => {
+      this.userData.signup(form.value as UserOptions).subscribe(res => {
         this.router.navigateByUrl('/app/tabs/dashboard');
       });
     }

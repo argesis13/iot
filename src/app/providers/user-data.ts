@@ -61,7 +61,7 @@ export class UserData {
   }
 
   signup(user: UserOptions): Observable<any> {
-    return this.http.post(this.env.url + 'users/', {username: user}).pipe(
+    return this.http.post(this.env.url + 'users/', user).pipe(
       map(res => {
         console.log(res);
         this.storage.set(this.HAS_LOGGED_IN, true).then(() => {
