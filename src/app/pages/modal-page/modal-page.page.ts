@@ -32,8 +32,9 @@ export class ModalPagePage {
   allow(b: boolean) {
     this.userData.getUsername().then(u => {
       this.http.post(this.env.url + 'access/allow/' + u + '/' + b, new HttpHeaders())
-        .subscribe(r => console.log('allow: ' + b));
-      this.modalController.dismiss().then(a => this.bogus.setIsActive(false));
+        .subscribe(() => {
+          this.modalController.dismiss().then(a => this.bogus.setIsActive(false));
+        });
     });
   }
 
